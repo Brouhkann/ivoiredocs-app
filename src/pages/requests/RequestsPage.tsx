@@ -6,7 +6,6 @@ import type { Request, DocumentType } from '../../types';
 import { DOCUMENT_CONFIGS } from '../../utils/documents';
 import {
   PlusIcon,
-  FunnelIcon,
   MagnifyingGlassIcon,
   DocumentTextIcon,
   ClockIcon,

@@ -95,7 +95,7 @@ export default function NewRequestPage() {
       
       const delegateEarnings = Math.round(totalAmount * 0.6); // 60% pour le délégué
 
-      const { data, error: insertError } = await supabase
+      const { error: insertError } = await supabase
         .from('requests')
         .insert({
           user_id: user.id,

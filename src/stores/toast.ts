@@ -1,8 +1,6 @@
 import { create } from 'zustand';
 import type { ToastProps } from '../components/ui/Toast';
 
-type ToastType = 'success' | 'error' | 'warning' | 'info';
-
 interface Toast extends Omit<ToastProps, 'onClose'> {
   id: string;
 }
