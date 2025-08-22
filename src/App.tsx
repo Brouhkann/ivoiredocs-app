@@ -8,6 +8,10 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import DashboardPage from './pages/dashboard/DashboardPage';
+import NewRequestPage from './pages/requests/NewRequestPage';
+import RequestsPage from './pages/requests/RequestsPage';
+import AboutPage from './pages/AboutPage';
+import ServicesPage from './pages/ServicesPage';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -31,6 +35,8 @@ function App() {
         <Routes>
           {/* Routes publiques */}
           <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/services" element={<ServicesPage />} />
           <Route path="/auth/login" element={<LoginPage />} />
           <Route path="/auth/register" element={<RegisterPage />} />
 
@@ -38,6 +44,16 @@ function App() {
           <Route path="/dashboard" element={
             <ProtectedRoute>
               <DashboardPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/requests" element={
+            <ProtectedRoute>
+              <RequestsPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/requests/new" element={
+            <ProtectedRoute>
+              <NewRequestPage />
             </ProtectedRoute>
           } />
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../stores/auth';
+import { toast } from '../../stores/toast';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
 export default function RegisterPage() {
@@ -65,14 +66,15 @@ export default function RegisterPage() {
 
     try {
       await signUp(formData.email, formData.password, formData.name, formData.phone);
+      toast.success('Inscription réussie', 'Bienvenue sur Ivoiredocs.ci !');
       navigate('/dashboard', { replace: true });
     } catch (err: any) {
       console.error('Erreur d\'inscription:', err);
-      setError(
-        err.message?.includes('already registered') 
-          ? 'Cet email est déjà utilisé'
-          : 'Une erreur est survenue lors de l\'inscription'
-      );
+      const errorMessage = err.message?.includes('already registered') 
+        ? 'Cet email est déjà utilisé'
+        : 'Une erreur est survenue lors de l\'inscription';
+      setError(errorMessage);
+      toast.error('Erreur d\'inscription', errorMessage);
     } finally {
       setLoading(false);
     }

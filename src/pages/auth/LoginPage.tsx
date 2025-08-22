@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../../stores/auth';
+import { toast } from '../../stores/toast';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
 export default function LoginPage() {
@@ -23,14 +24,15 @@ export default function LoginPage() {
 
     try {
       await signIn(email, password);
+      toast.success('Connexion réussie', 'Bienvenue sur Ivoiredocs.ci !');
       navigate(from, { replace: true });
     } catch (err: any) {
       console.error('Erreur de connexion:', err);
-      setError(
-        err.message === 'Invalid login credentials' 
-          ? 'Email ou mot de passe incorrect'
-          : 'Une erreur est survenue lors de la connexion'
-      );
+      const errorMessage = err.message === 'Invalid login credentials' 
+        ? 'Email ou mot de passe incorrect'
+        : 'Une erreur est survenue lors de la connexion';
+      setError(errorMessage);
+      toast.error('Erreur de connexion', errorMessage);
     } finally {
       setLoading(false);
     }
